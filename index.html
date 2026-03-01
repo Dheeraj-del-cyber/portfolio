@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dheeraj | Portfolio</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- WebGL Background -->
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar glass">
+        <div class="logo">DHEERAJ<span class="dot">.</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#contact" class="nav-btn">Let's Talk</a></li>
+        </ul>
+        <div class="hamburger">
+            <i class='bx bx-menu'></i>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="hero section">
+            <div class="hero-content">
+                <h1 class="hero-title reveal-text">Dheeraj</h1>
+                <h2 class="hero-subtitle reveal-text delay-1">Student Developer <span class="divider">|</span> Designer
+                    <span class="divider">|</span> Creator
+                </h2>
+                <div class="hero-btns reveal-fade delay-2">
+                    <a href="#projects" class="btn primary-btn btn-zoom">View Projects <i
+                            class='bx bx-right-arrow-alt'></i></a>
+                    <a href="#contact" class="btn secondary-btn btn-zoom">Contact Me</a>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <span>Scroll</span>
+            </div>
+        </section>
+
+        <!-- About & Skills Section -->
+        <section id="about" class="about section">
+            <div class="container">
+                <div class="section-header reveal-fade">
+                    <h2 class="section-title">About Me</h2>
+                    <p class="section-subtitle">Blending design with technology.</p>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-text glass-card reveal-slide-left">
+                        <div class="icon-wrap"><i class='bx bx-code-alt'></i></div>
+                        <h3>The Developer</h3>
+                        <p>I build interactive, responsive, and performance-driven web applications. My focus is on
+                            creating seamless digital experiences with modern web technologies.</p>
+                    </div>
+
+                    <div class="about-text glass-card reveal-slide-up delay-1">
+                        <div class="icon-wrap"><i class='bx bxs-paint'></i></div>
+                        <h3>The Designer</h3>
+                        <p>I craft intuitive user interfaces with a strong emphasis on aesthetics, typography, and
+                            micro-interactions. My designs aim to be functional yet futuristic.</p>
+                    </div>
+
+                    <div class="about-text glass-card reveal-slide-right delay-2">
+                        <div class="icon-wrap"><i class='bx bxs-rocket'></i></div>
+                        <h3>The Creator</h3>
+                        <p>Constantly experimenting with 3D elements, animations, and new frameworks to push the
+                            boundaries of what's possible on the web.</p>
+                    </div>
+                </div>
+
+                <div class="skills-wrapper reveal-fade">
+                    <h3 class="subsection-title">Core Skills</h3>
+                    <div class="skills-container">
+                        <!-- Skill animated bars -->
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Frontend Development</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>UI/UX Design</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" data-width="85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Python</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" data-width="75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Backend / APIs</span>
+                                <span>70%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" data-width="70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects section">
+            <div class="container">
+                <div class="section-header reveal-fade">
+                    <h2 class="section-title">Featured Work</h2>
+                    <p class="section-subtitle">A selection of my recent creations.</p>
+                </div>
+
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <div class="project-card glass project-reveal">
+                        <div class="project-img-wrapper">
+                            <div class="project-img bg-1"></div>
+                            <div class="project-overlay">
+                                <a href="https://dheeraj-del-cyber.github.io/ise-website/" target="_blank"
+                                    class="view-btn"><i class='bx bx-link-external'></i></a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <span class="project-category">Web Platform</span>
+                            <h3 class="project-title">Notes Website</h3>
+                            <p class="project-desc">A centralized platform where students can access and share class
+                                notes easily.</p>
+                            <div class="project-tech">
+                                <span>HTML</span><span>CSS</span><span>JavaScript</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card glass project-reveal delay-1">
+                        <div class="project-img-wrapper">
+                            <div class="project-img bg-2"></div>
+                            <div class="project-overlay">
+                                <a href="https://dheeraj-del-cyber.github.io/sgpa-cgpa-calculator/" target="_blank"
+                                    class="view-btn"><i class='bx bx-link-external'></i></a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <span class="project-category">Utility Tool</span>
+                            <h3 class="project-title">CGPA Calculator</h3>
+                            <p class="project-desc">A dynamic tool for students to calculate and track their cumulative
+                                grade point average.</p>
+                            <div class="project-tech">
+                                <span>JavaScript</span><span>Logic</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project-card glass project-reveal delay-2">
+                        <div class="project-img-wrapper">
+                            <div class="project-img bg-3"></div>
+                            <div class="project-overlay">
+                                <a href="https://dheeraj-del-cyber.github.io/GRV-FOOTWEAR/" target="_blank"
+                                    class="view-btn"><i class='bx bx-link-external'></i></a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <span class="project-category">Business Software</span>
+                            <h3 class="project-title">Sales Tracking - GRV Footwears</h3>
+                            <p class="project-desc">A custom sales tracking system built specifically for the GRV
+                                FOOTWEARS shop to manage inventory and sales.</p>
+                            <div class="project-tech">
+                                <span>Python</span><span>Database</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience timeline -->
+        <section id="experience" class="experience section">
+            <div class="container">
+                <div class="section-header reveal-fade">
+                    <h2 class="section-title">Journey</h2>
+                    <p class="section-subtitle">My educational and professional path.</p>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item reveal-slide-up">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content glass-card">
+                            <span class="timeline-date">2025 - Present</span>
+                            <h3 class="timeline-title">B.E Engineering Student</h3>
+                            <p class="timeline-org">Canara Engineering College</p>
+                            <p class="timeline-desc">Started my Bachelor of Engineering journey. Focusing on core
+                                computer science foundations, logic building, and modern development practices.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item reveal-slide-up">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content glass-card">
+                            <span class="timeline-date">Present</span>
+                            <h3 class="timeline-title">Independent Developer</h3>
+                            <p class="timeline-org">Self Taught</p>
+                            <p class="timeline-desc">Building practical tools like the Notes Website and business
+                                solutions like the GRV Footwears sales tracker to solve real-world problems.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact section">
+            <div class="container">
+                <div class="contact-wrapper glass reveal-fade">
+                    <div class="contact-info">
+                        <h2>Let's create something <span class="text-gradient">extraordinary.</span></h2>
+                        <p>Feel free to reach out if you're looking for a developer, have a question, or just want to
+                            connect.</p>
+
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <i class='bx bx-envelope'></i>
+                                <span>dheerajkoila97@gmail.com</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class='bx bx-map'></i>
+                                <span>Mangalore, India</span>
+                            </div>
+                        </div>
+
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/in/dheeraj-poojary-7a6661303?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                                target="_blank" class="social-icon"><i class='bx bxl-linkedin'></i></a>
+                            <a href="https://www.instagram.com/_dheeraj_koila_?igsh=MTZxN3hvcjhiZ3JzZw=="
+                                target="_blank" class="social-icon"><i class='bx bxl-instagram'></i></a>
+                        </div>
+                    </div>
+
+                    <div class="contact-form-container">
+                        <form id="contactForm" class="contact-form"
+                            action="https://formsubmit.co/dheerajkoila97@gmail.com" method="POST">
+                            <!-- Anti-spam & redirect settings for FormSubmit -->
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_subject" value="New Portfolio Contact Message!">
+
+                            <div class="input-group">
+                                <input type="text" name="name" id="name" required placeholder=" ">
+                                <label for="name">Your Name</label>
+                            </div>
+                            <div class="input-group">
+                                <input type="email" name="email" id="email" required placeholder=" ">
+                                <label for="email">Your Email</label>
+                            </div>
+                            <div class="input-group">
+                                <textarea name="message" id="message" required placeholder=" " rows="4"></textarea>
+                                <label for="message">Your Message</label>
+                            </div>
+                            <button type="submit" class="btn primary-btn btn-zoom submit-btn">
+                                <span>Send Message</span> <i class='bx bx-send'></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Developed by <strong>DHEERAJ KOILA</strong> <i class='bx bxs-heart text-gradient'></i></p>
+    </footer>
+
+    <!-- Scripts: Three.js, GSAP, Custom Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
