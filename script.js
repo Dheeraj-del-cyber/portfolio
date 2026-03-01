@@ -248,7 +248,7 @@ const pointLight2 = new THREE.PointLight(0x6366f1, 2);
 pointLight2.position.set(-20, -20, 20);
 scene.add(pointLight2);
 
-// Mouse Parallax Interaction
+// Mouse & Touch Parallax Interaction
 let mouseX = 0;
 let mouseY = 0;
 let targetX = 0;
@@ -261,6 +261,20 @@ document.addEventListener('mousemove', (event) => {
     mouseX = (event.clientX - windowHalfX);
     mouseY = (event.clientY - windowHalfY);
 });
+
+document.addEventListener('touchstart', (event) => {
+    if (event.touches.length > 0) {
+        mouseX = (event.touches[0].clientX - windowHalfX);
+        mouseY = (event.touches[0].clientY - windowHalfY);
+    }
+}, { passive: true });
+
+document.addEventListener('touchmove', (event) => {
+    if (event.touches.length > 0) {
+        mouseX = (event.touches[0].clientX - windowHalfX);
+        mouseY = (event.touches[0].clientY - windowHalfY);
+    }
+}, { passive: true });
 
 // Render Loop
 const clock = new THREE.Clock();
