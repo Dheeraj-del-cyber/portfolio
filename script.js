@@ -170,10 +170,26 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const target = document.querySelector(this.getAttribute('href'));
         if (!target) return;
 
-        // Add zoom transitio class to main
+        // Add zoom transition class to main
         const main = document.querySelector('main');
         main.style.transition = 'transform 0.5s ease-in-out';
         main.style.transform = 'scale(0.95)';
+
+        // Deep Zoom into Space Effect (Three.js Camera)
+        gsap.to(camera.position, {
+            z: 5, // Zoom way in (from normal 30)
+            duration: 0.8,
+            ease: 'power2.inOut',
+            yoyo: true, // Go back to original position
+            repeat: 1
+        });
+
+        // Temporarily speed up particle rotation for "warp" effect
+        gsap.to(particles.rotation, {
+            z: '+=2',
+            duration: 1.6,
+            ease: 'power1.inOut'
+        });
 
         setTimeout(() => {
             target.scrollIntoView({
