@@ -863,8 +863,10 @@ body::after {
 
 .timeline-item {
     margin-bottom: 6rem;
-    position: relative;
+    position: sticky;
+    top: 120px;
     padding-left: 4rem;
+    z-index: 1;
 }
 
 .timeline-item::before {
@@ -894,6 +896,9 @@ body::after {
     padding: 2.5rem;
     position: relative;
     box-shadow: 10px 10px 0 rgba(59, 130, 246, 0.05);
+    height: 280px;
+    display: flex;
+    flex-direction: column;
 }
 
 .timeline-content::after {
@@ -1178,6 +1183,7 @@ footer p {
 
     .timeline-item {
         padding-left: 2.5rem;
+        margin-bottom: 2.5rem;
     }
 
     .timeline-content {
@@ -1185,28 +1191,4 @@ footer p {
     }
 }
 
-/* Mute Button */
-.mute-btn {
-    position: fixed;
-    bottom: 2rem;
-    right: 5%;
-    width: 45px;
-    height: 45px;
-    background: white;
-    border: 1px solid var(--primary);
-    color: var(--primary);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.3rem;
-    cursor: pointer;
-    z-index: 1000;
-    transition: var(--transition);
-    box-shadow: 4px 4px 0 rgba(30, 41, 59, 0.1);
-}
-
-.mute-btn:hover {
-    transform: translate(-3px, -3px);
-    box-shadow: 6px 6px 0 var(--accent);
-    color: var(--accent);
 }

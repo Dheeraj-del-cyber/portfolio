@@ -162,12 +162,14 @@ gsap.utils.toArray('.timeline-item').forEach((item, i) => {
     gsap.from(item, {
         scrollTrigger: {
             trigger: item,
-            start: 'top 85%'
+            start: 'top 85%',
+            toggleActions: 'play none none reverse'
         },
-        x: -50,
+        y: 80,
         opacity: 0,
         duration: 0.8,
-        ease: 'power3.out'
+        ease: 'power3.out',
+        clearProps: 'transform' // Very important: removes GSAP transforms after execution so CSS position: sticky works
     });
 });
 
@@ -376,25 +378,4 @@ if (bgMusic) {
     document.addEventListener('keydown', playAudio);
     document.addEventListener('scroll', playAudio);
     document.addEventListener('touchstart', playAudio);
-
-    // Mute button logic
-    const muteBtn = document.getElementById('mute-btn');
-    if (muteBtn) {
-        muteBtn.addEventListener('click', (e) => {
-            // Toggle mute
-            bgMusic.muted = !bgMusic.muted;
-            
-            // Update icon
-            const icon = muteBtn.querySelector('i');
-            if (bgMusic.muted) {
-                icon.className = 'bx bx-volume-mute';
-            } else {
-                icon.className = 'bx bx-volume-full';
-                // Try playing if it was paused and user un-muted it
-                if (bgMusic.paused) {
-                    playAudio();
-                }
-            }
-        });
-    }
 }
