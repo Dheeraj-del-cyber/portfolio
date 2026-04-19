@@ -196,19 +196,27 @@ body::after {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 1.2rem 5%;
+    padding: 1.5rem 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 1000;
-    background: white;
-    border-bottom: var(--paper-border);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 0;
     transition: var(--transition);
 }
 
 .navbar.scrolled {
-    padding: 0.8rem 5%;
+    top: 1rem;
+    left: 5%;
+    width: 90%;
+    padding: 1rem 3rem;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: var(--paper-border);
+    border-radius: 50px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
@@ -247,7 +255,7 @@ body::after {
 .nav-btn {
     color: var(--primary) !important;
     border: 2px solid var(--primary);
-    border-radius: 0;
+    border-radius: 30px;
 }
 
 .nav-btn:hover {
@@ -1121,7 +1129,11 @@ footer p {
     .contact-wrapper {
         grid-template-columns: 1fr;
         padding: 3rem 1.5rem;
-        gap: 4rem;
+        gap: 3rem;
+    }
+
+    .contact-wrapper::before {
+        left: 1.5rem;
     }
 
     .contact-info h2 {
@@ -1160,15 +1172,15 @@ footer p {
     .hero-title {
         font-size: 3rem;
     }
-
-    .navbar {
-        padding: 1.2rem 5%;
-    }
 }
 
 @media (max-width: 600px) {
-    .navbar {
+    .navbar.scrolled {
         padding: 0.8rem 1.5rem;
+        top: 0.8rem;
+        width: 94%;
+        left: 3%;
+        border-radius: 30px;
     }
 
     .hero-btns {
@@ -1189,6 +1201,18 @@ footer p {
     .timeline-content {
         padding: 1.5rem;
     }
-}
 
+    .contact-wrapper {
+        padding: 2.5rem 1rem;
+        gap: 2rem;
+    }
+
+    .contact-wrapper::before {
+        left: 1rem;
+        font-size: 0.6rem;
+    }
+
+    .contact-info h2 {
+        font-size: 2rem;
+    }
 }
