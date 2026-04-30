@@ -18,6 +18,11 @@
 </head>
 
 <body>
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress">
+        <div class="scroll-progress-bar"></div>
+    </div>
+
     <!-- Custom Cursor & Schematic Crosshair -->
     <div class="cursor-dot"></div>
     <div class="cursor-crosshair-h"></div>
@@ -42,6 +47,7 @@
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
+            <li><a href="#github-stats">GitHub</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#achievements">Achievements</a></li>
@@ -170,6 +176,81 @@
                             <div class="progress-bar">
                                 <div class="progress" data-width="75%"></div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GitHub Stats Section -->
+        <section id="github-stats" class="github-stats section">
+            <div class="container">
+                <div class="section-header reveal-fade">
+                    <h2 class="section-title">GitHub Activity</h2>
+                    <p class="section-subtitle">My coding journey in numbers.</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card glass-card reveal-slide-up">
+                        <div class="stat-icon">
+                            <i class='bx bx-code-alt'></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="repos-count">--</h3>
+                            <p>Public Repositories</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card glass-card reveal-slide-up delay-1">
+                        <div class="stat-icon">
+                            <i class='bx bx-git-commit'></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="commits-count">--</h3>
+                            <p>Total Commits</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card glass-card reveal-slide-up delay-2">
+                        <div class="stat-icon">
+                            <i class='bx bx-star'></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="stars-count">--</h3>
+                            <p>Stars Earned</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card glass-card reveal-slide-up delay-3">
+                        <div class="stat-icon">
+                            <i class='bx bx-git-branch'></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="followers-count">--</h3>
+                            <p>Followers</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="github-content">
+                    <div class="languages-chart glass-card reveal-fade delay-1">
+                        <h3>Most Used Languages</h3>
+                        <div id="languages-container">
+                            <div class="loading">Loading language stats...</div>
+                        </div>
+                    </div>
+
+                    <div class="contribution-graph glass-card reveal-fade delay-2">
+                        <h3>Contribution Graph</h3>
+                        <div id="contribution-graph">
+                            <div class="loading">Loading contribution data...</div>
+                        </div>
+                    </div>
+
+                    <div class="recent-activity glass-card reveal-fade delay-3">
+                        <h3>Recent Activity</h3>
+                        <div id="recent-activity">
+                            <div class="loading">Loading recent activity...</div>
                         </div>
                     </div>
                 </div>
@@ -438,6 +519,52 @@
             <span class="cert-modal-close">&times;</span>
             <div class="cert-loading" id="cert-loading">Loading certificate...</div>
             <img id="cert-image" src="" alt="Certificate" class="cert-image" style="display: none;">
+        </div>
+    </div>
+
+    <!-- Visitor Analytics Dashboard (Hidden) -->
+    <div id="analytics-dashboard" class="analytics-dashboard">
+        <div class="analytics-header">
+            <h2>Analytics Dashboard</h2>
+            <button id="close-analytics" class="close-btn">&times;</button>
+        </div>
+        <div class="analytics-content">
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <h3>Page Views</h3>
+                    <div class="metric" id="page-views">0</div>
+                    <p>Current session</p>
+                </div>
+                <div class="analytics-card">
+                    <h3>Time Spent</h3>
+                    <div class="metric" id="time-spent">00:00</div>
+                    <p>On this page</p>
+                </div>
+                <div class="analytics-card">
+                    <h3>Sections Viewed</h3>
+                    <div class="metric" id="sections-viewed">0/6</div>
+                    <p>Portfolio sections</p>
+                </div>
+                <div class="analytics-card">
+                    <h3>Device Type</h3>
+                    <div class="metric" id="device-type">Desktop</div>
+                    <p>Current device</p>
+                </div>
+                <div class="analytics-card">
+                    <h3>Screen Resolution</h3>
+                    <div class="metric" id="screen-res">1920x1080</div>
+                    <p>Display size</p>
+                </div>
+                <div class="analytics-card">
+                    <h3>Contact Forms</h3>
+                    <div class="metric" id="contact-submissions">0</div>
+                    <p>Form submissions</p>
+                </div>
+            </div>
+            <div class="analytics-details">
+                <h3>Section Analytics</h3>
+                <div id="section-analytics"></div>
+            </div>
         </div>
     </div>
 
