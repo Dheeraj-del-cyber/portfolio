@@ -50,12 +50,19 @@
             <button id="theme-toggle" class="theme-toggle-btn" type="button" aria-label="Toggle dark or light mode">
                 <i class='bx bx-moon'></i>
             </button>
-            <select id="theme-select" class="theme-select" aria-label="Select site theme">
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-                <option value="holiday">Holiday</option>
-                <option value="contrast">High Contrast</option>
-            </select>
+            <div class="theme-dropdown">
+                <button id="theme-select-btn" class="theme-select-btn" type="button" aria-haspopup="listbox"
+                    aria-expanded="false">
+                    <span id="theme-select-label">Light</span>
+                    <i class='bx bx-chevron-down'></i>
+                </button>
+                <ul id="theme-options" class="theme-options" role="listbox" aria-label="Select site theme">
+                    <li><button type="button" class="theme-option" data-theme-value="light" role="option">Light</button></li>
+                    <li><button type="button" class="theme-option" data-theme-value="dark" role="option">Dark</button></li>
+                    <li><button type="button" class="theme-option" data-theme-value="holiday" role="option">Holiday</button></li>
+                    <li><button type="button" class="theme-option" data-theme-value="contrast" role="option">High Contrast</button></li>
+                </ul>
+            </div>
         </div>
         <div class="hamburger">
             <i class='bx bx-menu'></i>

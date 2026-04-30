@@ -35,12 +35,22 @@ const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
 const navLinksItems = document.querySelectorAll('.nav-links a');
 const themeToggleBtn = document.getElementById('theme-toggle');
-const themeSelect = document.getElementById('theme-select');
+const themeDropdown = document.querySelector('.theme-dropdown');
+const themeSelectBtn = document.getElementById('theme-select-btn');
+const themeSelectLabel = document.getElementById('theme-select-label');
+const themeOptionsList = document.getElementById('theme-options');
+const themeOptionButtons = document.querySelectorAll('.theme-option');
 
 // Theme system with persistence
 const THEME_KEY = 'portfolio-theme';
 const DEFAULT_THEME = 'light';
 const VALID_THEMES = ['light', 'dark', 'holiday', 'contrast'];
+const THEME_LABELS = {
+    light: 'Light',
+    dark: 'Dark',
+    holiday: 'Holiday',
+    contrast: 'High Contrast'
+};
 
 function getStoredTheme() {
     const savedTheme = localStorage.getItem(THEME_KEY);
@@ -62,10 +72,14 @@ function updateThemeToggleIcon(theme) {
 function applyTheme(theme, savePreference = true) {
     const targetTheme = VALID_THEMES.includes(theme) ? theme : DEFAULT_THEME;
     document.body.setAttribute('data-theme', targetTheme);
-
-    if (themeSelect) {
-        themeSelect.value = targetTheme;
+    if (themeSelectLabel) {
+        themeSelectLabel.textContent = THEME_LABELS[targetTheme];
     }
+    themeOptionButtons.forEach((btn) => {
+        const isActive = btn.getAttribute('data-theme-value') === targetTheme;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
 
     updateThemeToggleIcon(targetTheme);
 
@@ -76,9 +90,27 @@ function applyTheme(theme, savePreference = true) {
 
 applyTheme(getStoredTheme(), false);
 
-if (themeSelect) {
-    themeSelect.addEventListener('change', (e) => {
-        applyTheme(e.target.value);
+if (themeSelectBtn && themeDropdown) {
+    themeSelectBtn.addEventListener('click', () => {
+        const isOpen = themeDropdown.classList.toggle('open');
+        themeSelectBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+}
+
+if (themeOptionsList && themeDropdown && themeSelectBtn) {
+    themeOptionsList.addEventListener('click', (event) => {
+        const optionBtn = event.target.closest('.theme-option');
+        if (!optionBtn) return;
+        applyTheme(optionBtn.getAttribute('data-theme-value'));
+        themeDropdown.classList.remove('open');
+        themeSelectBtn.setAttribute('aria-expanded', 'false');
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!themeDropdown.contains(event.target)) {
+            themeDropdown.classList.remove('open');
+            themeSelectBtn.setAttribute('aria-expanded', 'false');
+        }
     });
 }
 
