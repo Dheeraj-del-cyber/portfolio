@@ -5,11 +5,18 @@
     --primary: #1e293b;
     --secondary: #64748b;
     --accent: #3b82f6;
+    --accent-dark: #2563eb;
+    --accent-light: #60a5fa;
     --tech-green: #22c55e;
+    --warning: #f59e0b;
+    --error: #ef4444;
     --paper-shadow: 8px 8px 0 rgba(30, 41, 59, 0.1);
     --paper-border: 1px solid rgba(30, 41, 59, 0.15);
     --bg-overlay: rgba(59, 130, 246, 0.05);
     --text-gradient: #3b82f6;
+    --icon-color: #1e293b;
+    --link-color: #3b82f6;
+    --link-hover: #2563eb;
     
     --font-head: 'Outfit', sans-serif;
     --font-body: 'Inter', sans-serif;
@@ -24,53 +31,81 @@
     --primary: #f1f5f9;
     --secondary: #94a3b8;
     --accent: #60a5fa;
+    --accent-dark: #3b82f6;
+    --accent-light: #93c5fd;
     --tech-green: #34d399;
-    --paper-shadow: 8px 8px 0 rgba(15, 23, 42, 0.3);
-    --paper-border: 1px solid rgba(51, 65, 85, 0.3);
+    --warning: #fbbf24;
+    --error: #f87171;
+    --paper-shadow: 8px 8px 0 rgba(15, 23, 42, 0.5);
+    --paper-border: 1px solid rgba(100, 116, 139, 0.3);
     --bg-overlay: rgba(96, 165, 250, 0.08);
     --text-gradient: #60a5fa;
+    --icon-color: #f1f5f9;
+    --link-color: #60a5fa;
+    --link-hover: #93c5fd;
 }
 
 /* High Contrast Theme */
 [data-theme="high-contrast"] {
     --bg-paper: #000000;
     --paper-card: #ffffff;
-    --primary: #ffffff;
-    --secondary: #cccccc;
+    --primary: #000000;
+    --secondary: #666666;
     --accent: #ffff00;
+    --accent-dark: #e6e600;
+    --accent-light: #ffff33;
     --tech-green: #00ff00;
-    --paper-shadow: 8px 8px 0 rgba(255, 255, 0, 0.3);
-    --paper-border: 2px solid #ffff00;
-    --bg-overlay: rgba(255, 255, 0, 0.1);
+    --warning: #ff6600;
+    --error: #ff0000;
+    --paper-shadow: 8px 8px 0 rgba(255, 255, 0, 0.5);
+    --paper-border: 3px solid #ffff00;
+    --bg-overlay: rgba(255, 255, 0, 0.15);
     --text-gradient: #ffff00;
+    --icon-color: #000000;
+    --link-color: #ffff00;
+    --link-hover: #e6e600;
 }
 
 /* Holiday Theme (Christmas) */
 [data-theme="holiday"] {
-    --bg-paper: #0c0c0c;
+    --bg-paper: #0a0a0a;
     --paper-card: #1a1a1a;
     --primary: #ffffff;
-    --secondary: #b8b8b8;
-    --accent: #ff4444;
-    --tech-green: #44ff44;
-    --paper-shadow: 8px 8px 0 rgba(255, 68, 68, 0.2);
-    --paper-border: 1px solid rgba(255, 68, 68, 0.3);
-    --bg-overlay: rgba(255, 68, 68, 0.05);
-    --text-gradient: linear-gradient(45deg, #ff4444, #44ff44, #4444ff);
+    --secondary: #cccccc;
+    --accent: #ff3333;
+    --accent-dark: #cc0000;
+    --accent-light: #ff6666;
+    --tech-green: #00dd00;
+    --warning: #ff9900;
+    --error: #ff0000;
+    --paper-shadow: 8px 8px 0 rgba(255, 51, 51, 0.3);
+    --paper-border: 1px solid rgba(255, 51, 51, 0.5);
+    --bg-overlay: rgba(255, 51, 51, 0.08);
+    --text-gradient: linear-gradient(45deg, #ff3333, #00dd00);
+    --icon-color: #ffffff;
+    --link-color: #ff6666;
+    --link-hover: #ff3333;
 }
 
 /* Halloween Theme */
 [data-theme="halloween"] {
-    --bg-paper: #1a0a0a;
-    --paper-card: #2a1a1a;
-    --primary: #ffaa44;
-    --secondary: #cc8844;
-    --accent: #ff6600;
-    --tech-green: #44aa44;
-    --paper-shadow: 8px 8px 0 rgba(255, 102, 0, 0.2);
-    --paper-border: 1px solid rgba(255, 102, 0, 0.3);
-    --bg-overlay: rgba(255, 102, 0, 0.05);
-    --text-gradient: #ff6600;
+    --bg-paper: #0d0604;
+    --paper-card: #1a1208;
+    --primary: #ffb366;
+    --secondary: #dd8844;
+    --accent: #ff8800;
+    --accent-dark: #cc6600;
+    --accent-light: #ffaa33;
+    --tech-green: #33dd33;
+    --warning: #ffdd00;
+    --error: #ff2200;
+    --paper-shadow: 8px 8px 0 rgba(255, 136, 0, 0.3);
+    --paper-border: 2px solid rgba(255, 136, 0, 0.5);
+    --bg-overlay: rgba(255, 136, 0, 0.1);
+    --text-gradient: linear-gradient(45deg, #ff8800, #ffaa33);
+    --icon-color: #ffb366;
+    --link-color: #ffaa33;
+    --link-hover: #ff8800;
 }
 
 * {
