@@ -355,18 +355,27 @@ const bgMusic = document.getElementById('bg-music');
 if (bgMusic) {
     bgMusic.volume = 0.15; // Set volume to 15% for low audio
 
+    let interactionHandled = false;
+
     // Function to attempt playing audio
     const playAudio = () => {
+        if (interactionHandled) return;
+        
         if (bgMusic.paused) {
-            bgMusic.play().then(() => {
-                // Audio is playing successfully, we can remove the interaction listeners
-                document.removeEventListener('click', playAudio);
-                document.removeEventListener('keydown', playAudio);
-                document.removeEventListener('scroll', playAudio);
-                document.removeEventListener('touchstart', playAudio);
-            }).catch((err) => {
-                // Autoplay blocked, wait for next user interaction
-            });
+            const playPromise = bgMusic.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    interactionHandled = true;
+                    // Audio is playing successfully, we can remove the interaction listeners
+                    document.removeEventListener('click', playAudio);
+                    document.removeEventListener('keydown', playAudio);
+                    document.removeEventListener('touchstart', playAudio);
+                    document.removeEventListener('touchend', playAudio);
+                }).catch((err) => {
+                    // Autoplay blocked, wait for next user interaction
+                    console.log("Audio autoplay blocked, waiting for interaction.");
+                });
+            }
         }
     };
 
@@ -376,6 +385,64 @@ if (bgMusic) {
     // Listen to user interactions to bypass autoplay policy
     document.addEventListener('click', playAudio);
     document.addEventListener('keydown', playAudio);
-    document.addEventListener('scroll', playAudio);
     document.addEventListener('touchstart', playAudio);
+    document.addEventListener('touchend', playAudio);
 }
+
+// --- CERTIFICATE MODAL FUNCTIONALITY ---
+const certModal = document.getElementById('cert-modal');
+const certImage = document.getElementById('cert-image');
+const certLoading = document.getElementById('cert-loading');
+const certModalClose = document.querySelector('.cert-modal-close');
+
+// Open modal when certificate button is clicked
+document.querySelectorAll('.cert-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const certSrc = 'assets/' + btn.getAttribute('data-cert');
+        certImage.src = '';
+        certImage.style.display = 'none';
+        certLoading.style.display = 'block';
+        certModal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Prevent background scroll
+        
+        // Animate modal in
+        gsap.fromTo(certModal, { opacity: 0 }, { opacity: 1, duration: 0.3 });
+        gsap.fromTo('.cert-modal-content', { scale: 0.8 }, { scale: 1, duration: 0.3 });
+        
+        // Load image
+        certImage.src = certSrc;
+        certImage.onload = () => {
+            certLoading.style.display = 'none';
+            certImage.style.display = 'block';
+            gsap.fromTo(certImage, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.5 });
+        };
+    });
+});
+
+// Close modal when close button is clicked
+certModalClose.addEventListener('click', () => {
+    gsap.to(certModal, { opacity: 0, duration: 0.3, onComplete: () => {
+        certModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }});
+});
+
+// Close modal when clicking outside the image
+certModal.addEventListener('click', (e) => {
+    if (e.target === certModal) {
+        gsap.to(certModal, { opacity: 0, duration: 0.3, onComplete: () => {
+            certModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }});
+    }
+});
+
+// Close modal on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && certModal.style.display === 'block') {
+        gsap.to(certModal, { opacity: 0, duration: 0.3, onComplete: () => {
+            certModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }});
+    }
+});

@@ -47,8 +47,32 @@
             <li><a href="#achievements">Achievements</a></li>
             <li><a href="#contact" class="nav-btn">Let's Talk</a></li>
         </ul>
-        <div class="hamburger">
-            <i class='bx bx-menu'></i>
+        <div class="nav-controls">
+            <div class="theme-switcher">
+                <button id="theme-toggle" class="theme-btn" title="Toggle Theme">
+                    <i class='bx bx-sun'></i>
+                </button>
+                <div class="theme-menu" id="theme-menu">
+                    <button class="theme-option" data-theme="default">
+                        <i class='bx bx-palette'></i> Blueprint
+                    </button>
+                    <button class="theme-option" data-theme="dark">
+                        <i class='bx bx-moon'></i> Dark
+                    </button>
+                    <button class="theme-option" data-theme="high-contrast">
+                        <i class='bx bx-low-vision'></i> High Contrast
+                    </button>
+                    <button class="theme-option" data-theme="holiday">
+                        <i class='bx bx-gift'></i> Holiday
+                    </button>
+                    <button class="theme-option" data-theme="halloween">
+                        <i class='bx bx-ghost'></i> Halloween
+                    </button>
+                </div>
+            </div>
+            <div class="hamburger">
+                <i class='bx bx-menu'></i>
+            </div>
         </div>
     </nav>
 
@@ -277,6 +301,7 @@
                             <p class="timeline-desc" style="margin-top: 1rem;">
                                 <span style="background: rgba(59, 130, 246, 0.05); color: var(--accent); padding: 0.4rem 0.8rem; border: 1px solid var(--accent); font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; display: inline-block; box-shadow: 4px 4px 0 rgba(59, 130, 246, 0.1);">🏆 Secured 15th Position in Finals</span>
                             </p>
+                            <button class="cert-btn" data-cert="matrix fusion.png"><i class='bx bx-certificate'></i> View Certificate</button>
                         </div>
                     </div>
 
@@ -287,6 +312,7 @@
                             <span class="timeline-date">Selected for Finals</span>
                             <h3 class="timeline-title">Hackwise 2.0</h3>
                             <p class="timeline-org">KVG College of Engineering</p>
+                            <button class="cert-btn" data-cert="hackwise.png"><i class='bx bx-certificate'></i> View Certificate</button>
                         </div>
                     </div>
 
@@ -297,6 +323,7 @@
                             <span class="timeline-date">Selected for Finals</span>
                             <h3 class="timeline-title">ForgeX</h3>
                             <p class="timeline-org">CMR Institute of Technology, Bangalore</p>
+                            <button class="cert-btn" data-cert="forgex.png"><i class='bx bx-certificate'></i> View Certificate</button>
                         </div>
                     </div>
 
@@ -306,8 +333,7 @@
                         <div class="timeline-content glass-card" data-index="AC04">
                             <span class="timeline-date">Selected for Finals</span>
                             <h3 class="timeline-title">Xypheria</h3>
-                            <p class="timeline-org">Alva’s Institute of Technology</p>
-                        </div>
+                            <p class="timeline-org">Alva’s Institute of Technology</p>                            <button class="cert-btn" data-cert="xypheria.png"><i class='bx bx-certificate'></i> View Certificate</button>                        </div>
                     </div>
 
                     <!-- Hackathon 5 -->
@@ -317,6 +343,7 @@
                             <span class="timeline-date">Direct Participation</span>
                             <h3 class="timeline-title">Ceatherion</h3>
                             <p class="timeline-org">Canara Engineering College</p>
+                            <button class="cert-btn" data-cert="ceatherion.png"><i class='bx bx-certificate'></i> View Certificate</button>
                         </div>
                     </div>
 
@@ -327,6 +354,7 @@
                             <span class="timeline-date">Direct Participation</span>
                             <h3 class="timeline-title">Chakrayuha</h3>
                             <p class="timeline-org">Srinivas Institute of Technology, Mukka</p>
+                            <button class="cert-btn" data-cert="chakrayuha.png"><i class='bx bx-certificate'></i> View Certificate</button>
                         </div>
                     </div>
 
@@ -337,6 +365,7 @@
                             <span class="timeline-date">Direct Participation</span>
                             <h3 class="timeline-title">Online Hackathon</h3>
                             <p class="timeline-org">NITK</p>
+                            <button class="cert-btn" data-cert="nitk.png"><i class='bx bx-certificate'></i> View Certificate</button>
                         </div>
                     </div>
 
@@ -402,6 +431,15 @@
             </div>
         </section>
     </main>
+
+    <!-- Certificate Modal -->
+    <div id="cert-modal" class="cert-modal">
+        <div class="cert-modal-content">
+            <span class="cert-modal-close">&times;</span>
+            <div class="cert-loading" id="cert-loading">Loading certificate...</div>
+            <img id="cert-image" src="" alt="Certificate" class="cert-image" style="display: none;">
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>
