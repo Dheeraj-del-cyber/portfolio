@@ -713,7 +713,7 @@ const initWarRoomGlobe = async () => {
     const galaxyPos = new Float32Array(positions); 
     const saturnPos = new Float32Array(particleCount * 3);
     const helixPos = new Float32Array(particleCount * 3);
-    const cpuPos = new Float32Array(particleCount * 3);
+    const satPos = new Float32Array(particleCount * 3);
 
     for (let i = 0; i < particleCount; i++) {
         // --- SATURN ---
@@ -739,28 +739,27 @@ const initWarRoomGlobe = async () => {
             helixPos[i*3+1] = (t - 6) * 2; helixPos[i*3+2] = radius * Math.sin(angle) * (1 - lerp) + radius * Math.sin(angle + Math.PI) * lerp;
         }
 
-        // --- CPU (Microchip) ---
+        // --- SATELLITE (Global Comms) ---
         const cS = Math.random();
-        if (cS < 0.7) { // Base Plate (Square)
-            cpuPos[i*3] = (Math.random() - 0.5) * 12;
-            cpuPos[i*3+1] = (Math.random() - 0.5) * 0.2;
-            cpuPos[i*3+2] = (Math.random() - 0.5) * 12;
-        } else if (cS < 0.9) { // Central Die (Raised Cube)
-            cpuPos[i*3] = (Math.random() - 0.5) * 4;
-            cpuPos[i*3+1] = 0.5 + Math.random() * 0.5;
-            cpuPos[i*3+2] = (Math.random() - 0.5) * 4;
-        } else { // Pins / Circuits
-            const edge = Math.floor(Math.random() * 4);
-            const pX = (Math.random() - 0.5) * 12;
-            const pZ = (Math.random() - 0.5) * 12;
-            if (edge === 0) cpuPos[i*3] = -6.5; 
-            else if (edge === 1) cpuPos[i*3] = 6.5;
-            else if (edge === 2) cpuPos[i*3+2] = -6.5;
-            else cpuPos[i*3+2] = 6.5;
-            
-            cpuPos[i*3] = edge < 2 ? cpuPos[i*3] : pX;
-            cpuPos[i*3+1] = (Math.random() - 0.5) * 0.5;
-            cpuPos[i*3+2] = edge >= 2 ? cpuPos[i*3+2] : pZ;
+        if (cS < 0.3) { // Core Body (Cylinder)
+            const r = 2 + Math.random() * 0.5;
+            const h = (Math.random() - 0.5) * 8;
+            const a = Math.random() * Math.PI * 2;
+            satPos[i*3] = r * Math.cos(a);
+            satPos[i*3+1] = h;
+            satPos[i*3+2] = r * Math.sin(a);
+        } else if (cS < 0.8) { // Solar Panels (Two Wings)
+            const side = Math.random() > 0.5 ? 1 : -1;
+            satPos[i*3] = (4 + Math.random() * 8) * side;
+            satPos[i*3+1] = (Math.random() - 0.5) * 4;
+            satPos[i*3+2] = (Math.random() - 0.5) * 0.2;
+        } else { // Antenna Dish
+            const r = Math.random() * 4;
+            const a = Math.random() * Math.PI * 2;
+            const h = 4 + (r * r) * 0.2; // Parabolic
+            satPos[i*3] = r * Math.cos(a);
+            satPos[i*3+1] = h + 2;
+            satPos[i*3+2] = r * Math.sin(a);
         }
     }
 
@@ -785,7 +784,7 @@ const initWarRoomGlobe = async () => {
             if (shape === 'galaxy') morphTo(galaxyPos, 'galaxy');
             else if (shape === 'saturn') morphTo(saturnPos, 'saturn');
             else if (shape === 'helix') morphTo(helixPos, 'helix');
-            else if (shape === 'cpu') morphTo(cpuPos, 'cpu');
+            else if (shape === 'satellite') morphTo(satPos, 'satellite');
         });
     });
 
