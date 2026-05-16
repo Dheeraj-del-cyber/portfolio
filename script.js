@@ -682,8 +682,21 @@ const initWarRoomGlobe = async () => {
 
     // Theme Sensing
     const getThemeColors = () => {
-        const isDark = document.body.getAttribute('data-theme') === 'dark' || document.body.getAttribute('data-theme') === 'contrast';
-        return { particleColor: isDark ? new THREE.Color(0x3b82f6) : new THREE.Color(0x94a3b8), particleOpacity: isDark ? 0.6 : 0.3 };
+        const theme = document.body.getAttribute('data-theme');
+        const isDark = theme === 'dark' || theme === 'contrast';
+        
+        if (isDark) {
+            return { 
+                particleColor: new THREE.Color(0x3b82f6), // Blueprint Blue
+                particleOpacity: 0.6 
+            };
+        } else {
+            // Darker colors for Light/Holiday themes to improve contrast
+            return { 
+                particleColor: new THREE.Color(0x1e293b), // Midnight Slate
+                particleOpacity: 0.5 
+            };
+        }
     };
     const updateThemeStyles = () => {
         const { particleColor, particleOpacity } = getThemeColors();
