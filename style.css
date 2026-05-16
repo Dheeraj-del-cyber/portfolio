@@ -1804,7 +1804,7 @@ footer p {
 
 .morph-btn.active {
     background: var(--accent);
-    color: white;
+    color: var(--on-primary); /* Corrected for all themes */
     border-color: var(--accent);
     box-shadow: 0 4px 15px var(--glow-primary);
 }
