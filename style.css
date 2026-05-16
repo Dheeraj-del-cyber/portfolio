@@ -1765,6 +1765,50 @@ footer p {
     letter-spacing: 2px;
 }
 
+.morph-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: rgba(30, 41, 59, 0.03);
+    border: 1px dashed var(--glass-border);
+}
+
+.morph-btn {
+    flex: 1;
+    min-width: 100px;
+    padding: 0.6rem 0.8rem;
+    background: var(--paper-card);
+    border: 1px solid var(--glass-border);
+    color: var(--secondary);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+}
+
+.morph-btn i {
+    font-size: 1rem;
+}
+
+.morph-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.morph-btn.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+    box-shadow: 0 4px 15px var(--glow-primary);
+}
+
 .mission-list {
     display: flex;
     flex-direction: column;

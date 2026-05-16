@@ -636,12 +636,18 @@ const initWarRoomGlobe = async () => {
     });
 
     // 3. INTERACTION & TOUCH
-    let isDragging = false, prevX = 0, targetRotY = 0, currRotY = 0;
+    let isDragging = false, prevX = 0, prevY = 0;
+    let targetRotY = 0, currRotY = 0;
+    let targetRotX = 0, currRotX = 0;
     const tooltip = document.getElementById('globe-tooltip');
 
-    const handleStart = (x) => { isDragging = true; prevX = x; };
+    const handleStart = (x, y) => { isDragging = true; prevX = x; prevY = y; };
     const handleMove = (x, y, clientX, clientY) => {
-        if (isDragging) { targetRotY += (x - prevX) * 0.01; prevX = x; }
+        if (isDragging) { 
+            targetRotY += (x - prevX) * 0.008; 
+            targetRotX += (y - prevY) * 0.008;
+            prevX = x; prevY = y; 
+        }
         
         const rect = container.getBoundingClientRect();
         const mouse = new THREE.Vector2(((clientX - rect.left) / width) * 2 - 1, -((clientY - rect.top) / height) * 2 + 1);
@@ -664,10 +670,13 @@ const initWarRoomGlobe = async () => {
         }
     };
 
-    container.addEventListener('mousedown', (e) => handleStart(e.clientX));
+    container.addEventListener('mousedown', (e) => handleStart(e.clientX, e.clientY));
     container.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY, e.clientX, e.clientY));
-    container.addEventListener('touchstart', (e) => handleStart(e.touches[0].clientX));
-    container.addEventListener('touchmove', (e) => handleMove(e.touches[0].clientX, e.touches[0].clientY, e.touches[0].clientX, e.touches[0].clientY));
+    container.addEventListener('touchstart', (e) => handleStart(e.touches[0].clientX, e.touches[0].clientY));
+    container.addEventListener('touchmove', (e) => {
+        handleMove(e.touches[0].clientX, e.touches[0].clientY, e.touches[0].clientX, e.touches[0].clientY);
+        e.preventDefault(); // Prevent scroll while rotating
+    }, { passive: false });
     window.addEventListener('mouseup', () => isDragging = false);
     window.addEventListener('touchend', () => isDragging = false);
 
@@ -699,19 +708,107 @@ const initWarRoomGlobe = async () => {
         item.classList.add('active');
     });
 
+    // --- 5. GALAXY MORPHING LOGIC ---
+    let currentShape = 'galaxy';
+    const galaxyPos = new Float32Array(positions); 
+    const saturnPos = new Float32Array(particleCount * 3);
+    const helixPos = new Float32Array(particleCount * 3);
+    const cpuPos = new Float32Array(particleCount * 3);
+
+    for (let i = 0; i < particleCount; i++) {
+        // --- SATURN ---
+        const sRand = Math.random();
+        if (sRand < 0.4) {
+            const phi = Math.random() * Math.PI * 2; const theta = Math.random() * Math.PI; const r = 4 + Math.random() * 0.5;
+            saturnPos[i*3] = r * Math.sin(theta) * Math.cos(phi); saturnPos[i*3+1] = r * Math.cos(theta); saturnPos[i*3+2] = r * Math.sin(theta) * Math.sin(phi);
+        } else {
+            const r = 6 + Math.random() * 6; const a = Math.random() * Math.PI * 2;
+            saturnPos[i*3] = r * Math.cos(a); saturnPos[i*3+1] = (Math.random() - 0.5) * 0.2; saturnPos[i*3+2] = r * Math.sin(a);
+        }
+
+        // --- HELIX ---
+        const hSection = Math.random();
+        const t = Math.random() * 12; const angle = t * 1.5; const radius = 4;
+        if (hSection < 0.45) {
+            helixPos[i*3] = radius * Math.cos(angle); helixPos[i*3+1] = (t - 6) * 2; helixPos[i*3+2] = radius * Math.sin(angle);
+        } else if (hSection < 0.9) {
+            helixPos[i*3] = radius * Math.cos(angle + Math.PI); helixPos[i*3+1] = (t - 6) * 2; helixPos[i*3+2] = radius * Math.sin(angle + Math.PI);
+        } else {
+            const lerp = Math.random();
+            helixPos[i*3] = radius * Math.cos(angle) * (1 - lerp) + radius * Math.cos(angle + Math.PI) * lerp;
+            helixPos[i*3+1] = (t - 6) * 2; helixPos[i*3+2] = radius * Math.sin(angle) * (1 - lerp) + radius * Math.sin(angle + Math.PI) * lerp;
+        }
+
+        // --- CPU (Microchip) ---
+        const cS = Math.random();
+        if (cS < 0.7) { // Base Plate (Square)
+            cpuPos[i*3] = (Math.random() - 0.5) * 12;
+            cpuPos[i*3+1] = (Math.random() - 0.5) * 0.2;
+            cpuPos[i*3+2] = (Math.random() - 0.5) * 12;
+        } else if (cS < 0.9) { // Central Die (Raised Cube)
+            cpuPos[i*3] = (Math.random() - 0.5) * 4;
+            cpuPos[i*3+1] = 0.5 + Math.random() * 0.5;
+            cpuPos[i*3+2] = (Math.random() - 0.5) * 4;
+        } else { // Pins / Circuits
+            const edge = Math.floor(Math.random() * 4);
+            const pX = (Math.random() - 0.5) * 12;
+            const pZ = (Math.random() - 0.5) * 12;
+            if (edge === 0) cpuPos[i*3] = -6.5; 
+            else if (edge === 1) cpuPos[i*3] = 6.5;
+            else if (edge === 2) cpuPos[i*3+2] = -6.5;
+            else cpuPos[i*3+2] = 6.5;
+            
+            cpuPos[i*3] = edge < 2 ? cpuPos[i*3] : pX;
+            cpuPos[i*3+1] = (Math.random() - 0.5) * 0.5;
+            cpuPos[i*3+2] = edge >= 2 ? cpuPos[i*3+2] : pZ;
+        }
+    }
+
+    const morphTo = (targetArray, shapeName) => {
+        currentShape = shapeName;
+        const posAttr = galaxyGeo.attributes.position;
+        for (let i = 0; i < posAttr.array.length; i++) {
+            gsap.to(posAttr.array, {
+                [i]: targetArray[i],
+                duration: 2.5,
+                ease: "expo.inOut",
+                onUpdate: () => { if (i === 0) posAttr.needsUpdate = true; }
+            });
+        }
+    };
+
+    document.querySelectorAll('.morph-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.morph-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const shape = btn.getAttribute('data-shape');
+            if (shape === 'galaxy') morphTo(galaxyPos, 'galaxy');
+            else if (shape === 'saturn') morphTo(saturnPos, 'saturn');
+            else if (shape === 'helix') morphTo(helixPos, 'helix');
+            else if (shape === 'cpu') morphTo(cpuPos, 'cpu');
+        });
+    });
+
     const animate = () => {
         requestAnimationFrame(animate);
         const time = Date.now() * 0.001;
-        if (!isDragging) targetRotY += 0.0008;
+        if (!isDragging) {
+            targetRotY += 0.0008;
+            targetRotX *= 0.98; // Slowly level out if not dragging
+        }
         currRotY += (targetRotY - currRotY) * 0.05;
+        currRotX += (targetRotX - currRotX) * 0.05;
+        
         galaxy.rotation.y = currRotY;
-        galaxy.rotation.x = Math.sin(time * 0.2) * 0.1;
+        galaxy.rotation.x = currRotX;
 
         const posAttr = galaxyGeo.attributes.position;
-        for (let i = 0; i < particleCount; i++) {
-            const ix = i * 3, iy = i * 3 + 1, iz = i * 3 + 2;
-            const factor = 1 + Math.sin(time + i * 0.1) * 0.005;
-            posAttr.array[ix] *= factor; posAttr.array[iy] *= factor; posAttr.array[iz] *= factor;
+        if (currentShape === 'galaxy') {
+            for (let i = 0; i < particleCount; i++) {
+                const ix = i * 3, iy = i * 3 + 1, iz = i * 3 + 2;
+                const factor = 1 + Math.sin(time + i * 0.1) * 0.003;
+                posAttr.array[ix] *= factor; posAttr.array[iy] *= factor; posAttr.array[iz] *= factor;
+            }
         }
         posAttr.needsUpdate = true;
         planets.forEach(p => p.group.rotation.y += p.speed);
