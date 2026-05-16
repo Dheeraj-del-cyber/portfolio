@@ -271,43 +271,16 @@ gsap.from('.contact-wrapper', {
     ease: 'power3.out'
 });
 
-// Smooth button scroll with zoom out effect concept
+// Smooth button scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (!target) return;
 
-        // Add zoom transition class to main
-        const main = document.querySelector('main');
-        main.style.transition = 'transform 0.5s ease-in-out';
-        main.style.transform = 'scale(0.95)';
-
-        // Deep Zoom into Space Effect (Three.js Camera)
-        gsap.to(camera.position, {
-            z: 5, // Zoom way in (from normal 30)
-            duration: 0.8,
-            ease: 'power2.inOut',
-            yoyo: true, // Go back to original position
-            repeat: 1
+        target.scrollIntoView({
+            behavior: 'smooth'
         });
-
-        // Temporarily speed up particle rotation for "warp" effect
-        gsap.to(particles.rotation, {
-            z: '+=2',
-            duration: 1.6,
-            ease: 'power1.inOut'
-        });
-
-        setTimeout(() => {
-            target.scrollIntoView({
-                behavior: 'smooth'
-            });
-
-            setTimeout(() => {
-                main.style.transform = 'scale(1)';
-            }, 600); // Wait for scroll roughly
-        }, 300);
     });
 });
 
@@ -550,8 +523,8 @@ const fetchGitHubData = async () => {
         const reposRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=12`);
         const reposData = await reposRes.json();
         
-        document.getElementById('github-username').innerText = userData.login.toUpperCase();
-        document.getElementById('github-repo-count').innerText = userData.public_repos.toString().padStart(2, '0');
+        document.getElementById('github-username-sidebar').innerText = userData.login.toUpperCase();
+        document.getElementById('github-repo-count-sidebar').innerText = userData.public_repos.toString().padStart(2, '0');
         
         const list = document.getElementById('mission-list');
         list.innerHTML = '';
@@ -742,8 +715,11 @@ const initWarRoomGlobe = async () => {
     };
     animate();
 
+    let lastWidth = container.clientWidth;
     window.addEventListener('resize', () => {
         const w = container.clientWidth, h = container.clientHeight;
+        if (Math.abs(w - lastWidth) < 5) return; // Ignore tiny shifts from scrollbars
+        lastWidth = w;
         camera.aspect = w / h; camera.updateProjectionMatrix();
         renderer.setSize(w, h);
     });

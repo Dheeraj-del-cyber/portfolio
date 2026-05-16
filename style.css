@@ -1661,15 +1661,11 @@ footer p {
     cursor: grabbing;
 }
 
-.globe-overlay {
-    position: absolute;
-    top: 1.5rem;
-    left: 1.5rem;
-    display: flex;
-    flex-direction: column;
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 1rem;
-    pointer-events: none;
-    z-index: 10;
+    margin-bottom: 2rem;
 }
 
 .stat-box {
@@ -1679,6 +1675,11 @@ footer p {
     display: flex;
     flex-direction: column;
     box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.stat-box:hover {
+    transform: translateY(-3px);
 }
 
 .stat-label {
