@@ -1648,13 +1648,13 @@ footer p {
 }
 
 .globe-canvas-container {
-    flex: 1.5;
+    flex: 0 0 65%; /* Lock width to 65% on desktop */
     background: color-mix(in srgb, var(--primary) 5%, transparent);
     position: relative;
     border: 1px solid var(--glass-border);
     cursor: grab;
     overflow: hidden;
-    min-height: 450px;
+    min-height: 500px;
 }
 
 .globe-canvas-container:active {
@@ -1701,6 +1701,7 @@ footer p {
     color: var(--on-primary);
     padding: 0.8rem 1.2rem;
     font-family: var(--font-mono);
+    font-size: 0.75rem;
     pointer-events: none;
     opacity: 0;
     transform: translate(-50%, -120%);
@@ -1736,11 +1737,12 @@ footer p {
 }
 
 .war-room-info {
-    flex: 1;
+    flex: 0 0 35%; /* Lock sidebar to 35% */
     display: flex;
     flex-direction: column;
     border-left: 1px dashed var(--glass-border);
     padding-left: 2rem;
+    min-width: 0; /* Prevents flex children from pushing width */
 }
 
 .info-header {
