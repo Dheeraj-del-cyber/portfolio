@@ -1830,6 +1830,14 @@ footer p {
 
 /* Mobile Responsiveness */
 @media (max-width: 992px) {
+    /* Hide desktop-only cursor elements */
+    .cursor-dot, 
+    .cursor-crosshair-h, 
+    .cursor-crosshair-v, 
+    .cursor-coords {
+        display: none !important;
+    }
+
     .war-room-container {
         flex-direction: column;
         height: auto;
