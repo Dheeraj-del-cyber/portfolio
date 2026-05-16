@@ -23,10 +23,14 @@ window.addEventListener('mousemove', (e) => {
     crosshairH.style.top = `${posY}px`;
     crosshairV.style.left = `${posX}px`;
 
-    // Update Coordinates
-    coordLabel.style.left = `${posX + 15}px`;
-    coordLabel.style.top = `${posY + 15}px`;
+    // Update Coordinates - Move further away and handle opacity
+    coordLabel.style.left = `${posX + 25}px`;
+    coordLabel.style.top = `${posY + 25}px`;
     coordLabel.innerText = `${posX}, ${posY}`;
+
+    // Hide coords when hovering over interactive elements or navbar for better clarity
+    const isOverInteractive = e.target.closest('a, button, .mission-item, .stat-box, .navbar');
+    coordLabel.style.opacity = isOverInteractive ? '0' : '0.6';
 });
 
 // Navbar scroll effect

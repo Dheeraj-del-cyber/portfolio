@@ -217,7 +217,7 @@ body::after {
 
 .cursor-coords {
     position: fixed;
-    z-index: 10000;
+    z-index: 900; /* Behind navbar and overlays */
     pointer-events: none;
     font-family: var(--font-mono);
     font-size: 0.65rem;
