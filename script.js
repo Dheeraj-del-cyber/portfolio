@@ -533,3 +533,220 @@ document.addEventListener('keydown', (e) => {
         }});
     }
 });
+
+// --- THE CELESTIAL CODE NEBULA (ULTRA-UNIQUE DATA ART) ---
+const GITHUB_USERNAME = "Dheeraj-del-cyber";
+
+const LANG_COLORS = {
+    'Python': '#3572A5', 'JavaScript': '#f1e05a', 'HTML': '#e34c26', 
+    'CSS': '#563d7c', 'TypeScript': '#3178c6', 'Java': '#b07219', 
+    'C++': '#f34b7d', 'default': '#ffffff'
+};
+
+const fetchGitHubData = async () => {
+    try {
+        const userRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`);
+        const userData = await userRes.json();
+        const reposRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=12`);
+        const reposData = await reposRes.json();
+        
+        document.getElementById('github-username').innerText = userData.login.toUpperCase();
+        document.getElementById('github-repo-count').innerText = userData.public_repos.toString().padStart(2, '0');
+        
+        const list = document.getElementById('mission-list');
+        list.innerHTML = '';
+        
+        reposData.forEach((repo, index) => {
+            const langColor = LANG_COLORS[repo.language] || LANG_COLORS['default'];
+            const item = document.createElement('div');
+            item.className = 'mission-item';
+            item.setAttribute('data-index', index);
+            item.innerHTML = `
+                <span class="mission-status" style="background: ${langColor}; box-shadow: 0 0 10px ${langColor}"></span>
+                <div class="mission-details">
+                    <span class="mission-name">${repo.name}</span>
+                    <span class="mission-loc" style="color: ${langColor}">${repo.language || 'Code'}</span>
+                </div>
+            `;
+            list.appendChild(item);
+        });
+
+        return reposData;
+    } catch (err) { return []; }
+};
+
+const initWarRoomGlobe = async () => {
+    const container = document.getElementById('globe-canvas-container');
+    if (!container) return;
+
+    const width = container.clientWidth, height = container.clientHeight;
+    const isMobile = window.innerWidth < 768;
+    
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+    camera.position.z = isMobile ? 35 : 25; // Push back on mobile to see more
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
+
+    const repos = await fetchGitHubData();
+
+    // 1. THE PARTICLE GALAXY
+    const particleCount = isMobile ? 6000 : 12000; // Optimize for mobile
+    const positions = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
+
+    for (let i = 0; i < particleCount; i++) {
+        const phi = Math.acos(-1 + (2 * i) / particleCount);
+        const theta = Math.sqrt(particleCount * Math.PI) * phi;
+        
+        const r = isMobile ? 5 : 6;
+        positions[i * 3] = r * Math.cos(theta) * Math.sin(phi);
+        positions[i * 3 + 1] = r * Math.sin(theta) * Math.sin(phi);
+        positions[i * 3 + 2] = r * Math.cos(phi);
+
+        colors[i * 3] = 0.2; colors[i * 3 + 1] = 0.4; colors[i * 3 + 2] = 1.0;
+    }
+
+    const galaxyGeo = new THREE.BufferGeometry();
+    galaxyGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    galaxyGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    const galaxyMat = new THREE.PointsMaterial({ size: isMobile ? 0.08 : 0.05, vertexColors: true, transparent: true, opacity: 0.6 });
+    const galaxy = new THREE.Points(galaxyGeo, galaxyMat);
+    scene.add(galaxy);
+
+    // 2. REPOSITORY PLANETS
+    const planets = [];
+    const createGlowTexture = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = 64; canvas.height = 64;
+        const ctx = canvas.getContext('2d');
+        const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+        grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+        grad.addColorStop(0.3, 'rgba(255, 255, 255, 0.4)');
+        grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        ctx.fillStyle = grad; ctx.fillRect(0, 0, 64, 64);
+        return new THREE.CanvasTexture(canvas);
+    };
+    const glowTex = createGlowTexture();
+
+    repos.forEach((repo, index) => {
+        const langColor = new THREE.Color(LANG_COLORS[repo.language] || LANG_COLORS['default']);
+        const orbitBase = isMobile ? 7 : 9;
+        const orbitRadius = orbitBase + (index * (isMobile ? 0.5 : 0.8));
+        const speed = 0.0005 + (Math.random() * 0.001);
+        
+        const group = new THREE.Group();
+        group.rotation.x = Math.random() * Math.PI;
+        group.rotation.z = Math.random() * Math.PI;
+        scene.add(group);
+
+        const planet = new THREE.Mesh(
+            new THREE.SphereGeometry(isMobile ? 0.25 : 0.2, 16, 16),
+            new THREE.MeshBasicMaterial({ color: langColor })
+        );
+        planet.position.set(orbitRadius, 0, 0);
+        group.add(planet);
+
+        const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, color: langColor, transparent: true, opacity: 0.6, blending: THREE.ScreenBlending }));
+        sprite.scale.set(isMobile ? 2 : 1.5, isMobile ? 2 : 1.5, 1);
+        planet.add(sprite);
+
+        planet.userData = { name: repo.name, lang: repo.language, color: LANG_COLORS[repo.language] || '#ffffff' };
+        planets.push({ group, planet, speed });
+    });
+
+    // 3. INTERACTION & TOUCH
+    let isDragging = false, prevX = 0, targetRotY = 0, currRotY = 0;
+    const tooltip = document.getElementById('globe-tooltip');
+
+    const handleStart = (x) => { isDragging = true; prevX = x; };
+    const handleMove = (x, y, clientX, clientY) => {
+        if (isDragging) { targetRotY += (x - prevX) * 0.01; prevX = x; }
+        
+        const rect = container.getBoundingClientRect();
+        const mouse = new THREE.Vector2(((clientX - rect.left) / width) * 2 - 1, -((clientY - rect.top) / height) * 2 + 1);
+        const raycaster = new THREE.Raycaster();
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(planets.map(p => p.planet));
+
+        if (intersects.length > 0) {
+            const p = intersects[0].object;
+            tooltip.style.opacity = '1';
+            tooltip.style.left = `${clientX - rect.left}px`;
+            tooltip.style.top = `${clientY - rect.top}px`;
+            tooltip.querySelector('.tooltip-title').innerText = p.userData.name;
+            tooltip.querySelector('.tooltip-detail').innerText = p.userData.lang || 'Documentation';
+            tooltip.style.borderColor = p.userData.color;
+            gsap.to(p.scale, { x: 3, y: 3, z: 3, duration: 0.3 });
+        } else {
+            tooltip.style.opacity = '0';
+            planets.forEach(p => gsap.to(p.planet.scale, { x: 1, y: 1, z: 1, duration: 0.3 }));
+        }
+    };
+
+    container.addEventListener('mousedown', (e) => handleStart(e.clientX));
+    container.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY, e.clientX, e.clientY));
+    container.addEventListener('touchstart', (e) => handleStart(e.touches[0].clientX));
+    container.addEventListener('touchmove', (e) => handleMove(e.touches[0].clientX, e.touches[0].clientY, e.touches[0].clientX, e.touches[0].clientY));
+    window.addEventListener('mouseup', () => isDragging = false);
+    window.addEventListener('touchend', () => isDragging = false);
+
+    // Theme Sensing
+    const getThemeColors = () => {
+        const isDark = document.body.getAttribute('data-theme') === 'dark' || document.body.getAttribute('data-theme') === 'contrast';
+        return { particleColor: isDark ? new THREE.Color(0x3b82f6) : new THREE.Color(0x94a3b8), particleOpacity: isDark ? 0.6 : 0.3 };
+    };
+    const updateThemeStyles = () => {
+        const { particleColor, particleOpacity } = getThemeColors();
+        galaxyMat.color.copy(particleColor);
+        galaxyMat.opacity = particleOpacity;
+    };
+    new MutationObserver(updateThemeStyles).observe(document.body, { attributes: true, attributeFilter: ['data-theme'] });
+    updateThemeStyles();
+
+    // 4. BUTTON INTERACTION
+    document.getElementById('mission-list').addEventListener('click', (e) => {
+        const item = e.target.closest('.mission-item');
+        if (!item) return;
+        const index = parseInt(item.getAttribute('data-index'));
+        const p = planets[index];
+        if (!p) return;
+        planets.forEach(other => { gsap.to(other.planet.scale, { x: 1, y: 1, z: 1, duration: 0.5 }); other.planet.children[0].material.opacity = 0.5; });
+        gsap.to(p.planet.scale, { x: 4, y: 4, z: 4, duration: 0.8, ease: "elastic.out(1, 0.3)" });
+        p.planet.children[0].material.opacity = 1.0;
+        targetRotY = -p.group.rotation.y;
+        document.querySelectorAll('.mission-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+    });
+
+    const animate = () => {
+        requestAnimationFrame(animate);
+        const time = Date.now() * 0.001;
+        if (!isDragging) targetRotY += 0.0008;
+        currRotY += (targetRotY - currRotY) * 0.05;
+        galaxy.rotation.y = currRotY;
+        galaxy.rotation.x = Math.sin(time * 0.2) * 0.1;
+
+        const posAttr = galaxyGeo.attributes.position;
+        for (let i = 0; i < particleCount; i++) {
+            const ix = i * 3, iy = i * 3 + 1, iz = i * 3 + 2;
+            const factor = 1 + Math.sin(time + i * 0.1) * 0.005;
+            posAttr.array[ix] *= factor; posAttr.array[iy] *= factor; posAttr.array[iz] *= factor;
+        }
+        posAttr.needsUpdate = true;
+        planets.forEach(p => p.group.rotation.y += p.speed);
+        renderer.render(scene, camera);
+    };
+    animate();
+
+    window.addEventListener('resize', () => {
+        const w = container.clientWidth, h = container.clientHeight;
+        camera.aspect = w / h; camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+    });
+};
+
+window.addEventListener('load', () => setTimeout(initWarRoomGlobe, 500));

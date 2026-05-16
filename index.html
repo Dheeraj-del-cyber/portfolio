@@ -42,6 +42,7 @@
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
+            <li><a href="#war-room">War Room</a></li>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#achievements">Achievements</a></li>
             <li><a href="#contact" class="nav-btn">Let's Talk</a></li>
@@ -57,10 +58,14 @@
                     <i class='bx bx-chevron-down'></i>
                 </button>
                 <ul id="theme-options" class="theme-options" role="listbox" aria-label="Select site theme">
-                    <li><button type="button" class="theme-option" data-theme-value="light" role="option">Light</button></li>
-                    <li><button type="button" class="theme-option" data-theme-value="dark" role="option">Dark</button></li>
-                    <li><button type="button" class="theme-option" data-theme-value="holiday" role="option">Holiday</button></li>
-                    <li><button type="button" class="theme-option" data-theme-value="contrast" role="option">High Contrast</button></li>
+                    <li><button type="button" class="theme-option" data-theme-value="light" role="option">Light</button>
+                    </li>
+                    <li><button type="button" class="theme-option" data-theme-value="dark" role="option">Dark</button>
+                    </li>
+                    <li><button type="button" class="theme-option" data-theme-value="holiday"
+                            role="option">Holiday</button></li>
+                    <li><button type="button" class="theme-option" data-theme-value="contrast" role="option">High
+                            Contrast</button></li>
                 </ul>
             </div>
         </div>
@@ -74,7 +79,7 @@
             <div class="hero-content">
                 <h1 class="hero-title reveal-text">Hello, I'm <span class="text-gradient">Dheeraj</span></h1>
                 <h2 class="hero-subtitle reveal-text delay-1">Student Developer <span class="divider">|</span> Designer
-                    <span class="divider">|</span> Creator
+                    <span class="divider">|</span>
                 </h2>
                 <div class="hero-btns reveal-fade delay-2">
                     <a href="#achievements" class="btn primary-btn btn-zoom">View Achievements <i
@@ -202,8 +207,52 @@
                 </div>
             </div>
         </section>
+        <!-- Hackathon War Room Section -->
+        <section id="war-room" class="war-room section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Global <span class="text-gradient">Contributions</span></h2>
+                    <p class="section-subtitle">Visualizing the reach of my projects and open-source impact.</p>
+                </div>
 
-        <!-- Achievements & Hackathons Section -->
+                <div class="war-room-container glass">
+                    <div id="globe-canvas-container" class="globe-canvas-container">
+                        <div class="globe-overlay">
+                            <div class="stat-box">
+                                <span class="stat-label">GITHUB_USER</span>
+                                <span class="stat-value" id="github-username">SYNCING...</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">PUBLIC_REPOS</span>
+                                <span class="stat-value" id="github-repo-count">00</span>
+                            </div>
+                        </div>
+                        <div class="location-tooltip" id="globe-tooltip">
+                            <div class="tooltip-title">Location</div>
+                            <div class="tooltip-detail">Event Details</div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="war-room-info">
+                        <div class="info-header">
+                            <i class='bx bxl-github'></i>
+                            <h3>PROJECT_ANALYTICS</h3>
+                        </div>
+                        <div class="mission-list" id="mission-list">
+                            <div class="mission-item loading">
+                                <div class="mission-details">
+                                    <span class="mission-name">Fetching Data...</span>
+                                    <span class="mission-loc">Connecting to GitHub API</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="achievements" class="achievements section">
             <div class="container">
                 <div class="section-header reveal-fade">
@@ -220,9 +269,12 @@
                             <h3 class="timeline-title">Matrix Fusion 4.0</h3>
                             <p class="timeline-org">Yenepoya Institute of Technology, Moodbidri</p>
                             <p class="timeline-desc" style="margin-top: 1rem;">
-                                <span style="background: rgba(59, 130, 246, 0.05); color: var(--accent); padding: 0.4rem 0.8rem; border: 1px solid var(--accent); font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; display: inline-block; box-shadow: 4px 4px 0 rgba(59, 130, 246, 0.1);">🏆 Secured 15th Position in Finals</span>
+                                <span
+                                    style="background: rgba(59, 130, 246, 0.05); color: var(--accent); padding: 0.4rem 0.8rem; border: 1px solid var(--accent); font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; display: inline-block; box-shadow: 4px 4px 0 rgba(59, 130, 246, 0.1);">🏆
+                                    Secured 15th Position in Finals</span>
                             </p>
-                            <button class="cert-btn" data-cert="matrix fusion.png"><i class='bx bx-certificate'></i> View Certificate</button>
+                            <button class="cert-btn" data-cert="matrix fusion.png"><i class='bx bx-certificate'></i>
+                                View Certificate</button>
                         </div>
                     </div>
 
@@ -233,7 +285,8 @@
                             <span class="timeline-date">Selected for Finals</span>
                             <h3 class="timeline-title">Hackwise 2.0</h3>
                             <p class="timeline-org">KVG College of Engineering</p>
-                            <button class="cert-btn" data-cert="hackwise.png"><i class='bx bx-certificate'></i> View Certificate</button>
+                            <button class="cert-btn" data-cert="hackwise.png"><i class='bx bx-certificate'></i> View
+                                Certificate</button>
                         </div>
                     </div>
 
@@ -244,7 +297,8 @@
                             <span class="timeline-date">Selected for Finals</span>
                             <h3 class="timeline-title">ForgeX</h3>
                             <p class="timeline-org">CMR Institute of Technology, Bangalore</p>
-                            <button class="cert-btn" data-cert="forgex.png"><i class='bx bx-certificate'></i> View Certificate</button>
+                            <button class="cert-btn" data-cert="forgex.png"><i class='bx bx-certificate'></i> View
+                                Certificate</button>
                         </div>
                     </div>
 
@@ -254,7 +308,9 @@
                         <div class="timeline-content glass-card" data-index="AC04">
                             <span class="timeline-date">Selected for Finals</span>
                             <h3 class="timeline-title">Xypheria</h3>
-                            <p class="timeline-org">Alva’s Institute of Technology</p>                            <button class="cert-btn" data-cert="xypheria.png"><i class='bx bx-certificate'></i> View Certificate</button>                        </div>
+                            <p class="timeline-org">Alva’s Institute of Technology</p> <button class="cert-btn"
+                                data-cert="xypheria.png"><i class='bx bx-certificate'></i> View Certificate</button>
+                        </div>
                     </div>
 
                     <!-- Hackathon 5 -->
@@ -264,7 +320,8 @@
                             <span class="timeline-date">Direct Participation</span>
                             <h3 class="timeline-title">Ceatherion</h3>
                             <p class="timeline-org">Canara Engineering College</p>
-                            <button class="cert-btn" data-cert="ceatherion.png"><i class='bx bx-certificate'></i> View Certificate</button>
+                            <button class="cert-btn" data-cert="ceatherion.png"><i class='bx bx-certificate'></i> View
+                                Certificate</button>
                         </div>
                     </div>
 
@@ -275,7 +332,8 @@
                             <span class="timeline-date">Direct Participation</span>
                             <h3 class="timeline-title">Chakrayuha</h3>
                             <p class="timeline-org">Srinivas Institute of Technology, Mukka</p>
-                            <button class="cert-btn" data-cert="chakrayuha.png"><i class='bx bx-certificate'></i> View Certificate</button>
+                            <button class="cert-btn" data-cert="chakrayuha.png"><i class='bx bx-certificate'></i> View
+                                Certificate</button>
                         </div>
                     </div>
 
@@ -286,7 +344,8 @@
                             <span class="timeline-date">Direct Participation</span>
                             <h3 class="timeline-title">Online Hackathon</h3>
                             <p class="timeline-org">NITK</p>
-                            <button class="cert-btn" data-cert="nitk.png"><i class='bx bx-certificate'></i> View Certificate</button>
+                            <button class="cert-btn" data-cert="nitk.png"><i class='bx bx-certificate'></i> View
+                                Certificate</button>
                         </div>
                     </div>
 
@@ -319,8 +378,8 @@
                                 target="_blank" class="social-icon"><i class='bx bxl-linkedin'></i></a>
                             <a href="https://www.instagram.com/_dheeraj_koila_?igsh=MTZxN3hvcjhiZ3JzZw=="
                                 target="_blank" class="social-icon"><i class='bx bxl-instagram'></i></a>
-                            <a href="https://github.com/Dheeraj-del-cyber"
-                                target="_blank" class="social-icon"><i class='bx bxl-github'></i></a>
+                            <a href="https://github.com/Dheeraj-del-cyber" target="_blank" class="social-icon"><i
+                                    class='bx bxl-github'></i></a>
                         </div>
                     </div>
 
@@ -370,7 +429,9 @@
         <p>Developed by <strong>DHEERAJ KOILA</strong> <i class='bx bxs-heart'></i></p>
         <p style="margin-top: 0.5rem; display: flex; align-items: center; justify-content: flex-end; gap: 0.5rem;">
             Team Lead of <strong>ASTRA</strong>
-            <a href="https://www.instagram.com/astra._.in?igsh=MXYzNWx3OTJrYTdpMg==" target="_blank" style="color: var(--primary); font-size: 1.2rem; display: flex; transition: color 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--primary)'">
+            <a href="https://www.instagram.com/astra._.in?igsh=MXYzNWx3OTJrYTdpMg==" target="_blank"
+                style="color: var(--primary); font-size: 1.2rem; display: flex; transition: color 0.3s;"
+                onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--primary)'">
                 <i class='bx bxl-instagram'></i>
             </a>
         </p>

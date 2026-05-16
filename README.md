@@ -14,7 +14,8 @@ I am an Information Science and Engineering student passionate about:
 
 - Web Development
 - Coding
-- Creative Designing
+-AI/ML
+
 
 🛠️ Skills
 
@@ -28,6 +29,7 @@ I am an Information Science and Engineering student passionate about:
 - Personal Portfolio Website
 - Hackathon Projects
 - College Projects
+- Agri-Ai
 
 🏆 Achievements
 
