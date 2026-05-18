@@ -173,7 +173,8 @@ tl.from('.navbar', { y: -50, opacity: 0, duration: 1, ease: 'power3.out' })
     }, '-=0.55')
     .from('.hero-title', { y: 50, opacity: 0, duration: 1, ease: 'power3.out' }, '-=0.5')
     .from('.hero-subtitle', { y: 30, opacity: 0, duration: 1, ease: 'power3.out' }, '-=0.7')
-    .from('.hero-btns', { y: 30, opacity: 0, duration: 1, ease: 'power3.out' }, '-=0.7')
+    .from('.cosc-badge', { y: 18, opacity: 0, duration: 0.7, ease: 'power2.out' }, '-=0.55')
+    .from('.hero-btns', { y: 30, opacity: 0, duration: 1, ease: 'power3.out' }, '-=0.6')
     .from('.scroll-indicator', { opacity: 0, duration: 1 }, '-=0.5');
 
 // Navbar interactive hover animation
