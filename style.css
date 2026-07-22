@@ -2168,7 +2168,7 @@ footer p {
     }
 
     .hero {
-        padding: 6.8rem 6% 2.5rem !important;
+        padding: 5.4rem 6% 2rem !important;
         min-height: auto;
         text-align: left !important;
         align-items: flex-start !important;
@@ -2181,10 +2181,10 @@ footer p {
     }
 
     .hero-title {
-        font-size: clamp(3.6rem, 13.5vw, 5rem) !important;
-        line-height: 1.02;
+        font-size: clamp(4.2rem, 15vw, 5.5rem) !important;
+        line-height: 1.0;
         text-align: left !important;
-        margin-bottom: 1.25rem;
+        margin-bottom: 1.15rem;
         letter-spacing: -0.5px;
     }
 
