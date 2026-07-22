@@ -659,99 +659,125 @@ body[data-theme="contrast"] .theme-select-btn {
     border-left: 4px solid var(--accent);
 }
 
-/* COSC Membership Badge */
+/* COSC Membership Badge - Premium Glassmorphism */
 .cosc-badge {
-    display: flex;
+    display: inline-flex;
     align-self: flex-start;
-    align-items: center;
-    gap: 0.65rem;
-    padding: 0.5rem 1rem 0.5rem 0.75rem;
     margin-bottom: 2.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--secondary);
-    background: var(--chip-bg);
-    border: 1px solid var(--chip-border);
-    border-left: 3px solid var(--tech-green);
-    cursor: default;
-    transition: var(--transition);
     position: relative;
-    overflow: hidden;
-    opacity: 1;
-    animation: coscEntrance 0.7s ease 1.8s both;
+    border-radius: 50px;
+    padding: 2px;
+    background: linear-gradient(135deg, var(--tech-green), var(--accent), var(--tech-green));
+    background-size: 200% 200%;
+    animation: coscEntrance 0.7s ease 1.8s both, gradientShift 3s ease infinite;
+    cursor: default;
 }
 
 @keyframes coscEntrance {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(20px) scale(0.95); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-.cosc-badge::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.04), transparent);
-    transform: translateX(-100%);
-    transition: transform 0.5s ease;
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50%       { background-position: 100% 50%; }
 }
 
-.cosc-badge:hover::after {
-    transform: translateX(100%);
+.cosc-badge-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.55rem 1.1rem 0.55rem 0.85rem;
+    border-radius: 48px;
+    background: var(--bg-paper);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--secondary);
+    transition: var(--transition);
+    backdrop-filter: blur(10px);
 }
 
-.cosc-badge:hover {
-    border-color: var(--accent);
-    border-left-color: var(--tech-green);
+.cosc-badge:hover .cosc-badge-inner {
     background: rgba(59, 130, 246, 0.06);
-    color: var(--primary);
-    transform: translate(-3px, -3px);
-    box-shadow: 5px 5px 0 var(--accent);
 }
 
 .cosc-dot {
-    width: 7px;
-    height: 7px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
     background: var(--tech-green);
-    box-shadow: 0 0 8px var(--tech-green);
+    box-shadow: 0 0 10px var(--tech-green), 0 0 20px rgba(34,197,94,0.4);
     flex-shrink: 0;
     animation: coscPulse 2.2s ease-in-out infinite;
 }
 
 @keyframes coscPulse {
-    0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--tech-green); }
-    50%       { opacity: 0.35; box-shadow: 0 0 3px var(--tech-green); }
+    0%, 100% { box-shadow: 0 0 10px var(--tech-green), 0 0 20px rgba(34,197,94,0.4); }
+    50%       { box-shadow: 0 0 4px var(--tech-green), 0 0 8px rgba(34,197,94,0.2); }
+}
+
+.cosc-text {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+}
+
+.cosc-label {
+    color: var(--secondary);
+    font-size: 0.72rem;
 }
 
 .cosc-badge strong {
     color: var(--primary);
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: 0.01em;
 }
 
 .cosc-abbr {
-    color: var(--accent);
+    color: var(--tech-green);
+    font-weight: 800;
+    font-size: 0.78rem;
+}
+
+.cosc-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 0.25rem;
+    padding-left: 0.75rem;
+    border-left: 1px solid var(--chip-border);
+}
+
+.cosc-verified {
+    font-size: 0.62rem;
     font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--tech-green);
+    text-transform: uppercase;
 }
 
 .cosc-icon {
-    font-size: 1rem;
+    font-size: 1.05rem;
     color: var(--accent);
-    opacity: 0.7;
+    opacity: 0.8;
     transition: var(--transition);
 }
 
 .cosc-badge:hover .cosc-icon {
     opacity: 1;
-    transform: rotate(10deg);
+    transform: rotate(15deg) scale(1.15);
+    color: var(--tech-green);
 }
 
-/* Responsive: stack text gracefully on very small screens */
-@media (max-width: 400px) {
-    .cosc-badge {
+/* Responsive */
+@media (max-width: 480px) {
+    .cosc-badge-inner {
         font-size: 0.7rem;
-        padding: 0.45rem 0.75rem 0.45rem 0.6rem;
+        padding: 0.45rem 0.85rem 0.45rem 0.7rem;
         gap: 0.5rem;
     }
+    .cosc-right { display: none; }
 }
 
 .hero-btns {
@@ -1972,6 +1998,7 @@ footer p {
     font-size: 0.75rem;
     color: var(--secondary);
 }
+
 
 /* Mobile Responsiveness */
 @media (max-width: 992px) {
