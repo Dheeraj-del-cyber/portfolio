@@ -39,7 +39,7 @@ I am an Information Science and Engineering student passionate about:
 📬 Contact
 
 - GitHub: https://github.com/Dheeraj-del-cyber
-- LinkedIn: https://www.linkedin.com/in/dheeraj-koila-7a6661303
+- LinkedIn: https://www.linkedin.com/in/dheeraj-7a6661303
 - Email: dheerajkoila97@gmail.com
 
 ---
