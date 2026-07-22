@@ -2085,8 +2085,13 @@ footer p {
 
 /* Mobile Hero Customizations (768px & below) */
 @media (max-width: 768px) {
+    .navbar {
+        padding: 1rem 5%;
+    }
+
     .hero {
-        padding: 8.5rem 6% 3.5rem;
+        padding: 5.8rem 6% 3rem !important;
+        min-height: auto;
         text-align: left !important;
         align-items: flex-start !important;
     }
