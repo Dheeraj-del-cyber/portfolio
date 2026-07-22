@@ -1374,19 +1374,6 @@ body[data-theme="contrast"] .theme-select-btn {
     overflow: hidden;
 }
 
-.contact-wrapper::before {
-    content: 'COMMUNICATION_MODULE_01';
-    position: absolute;
-    top: 14px;
-    right: 1.4rem;
-    background: var(--accent);
-    color: var(--on-primary);
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    padding: 0.3rem 1rem;
-    border-radius: 999px;
-}
-
 .contact-info h2 {
     font-size: 3.5rem;
     font-weight: 800;
@@ -1599,10 +1586,6 @@ footer p {
         gap: 3rem;
     }
 
-    .contact-wrapper::before {
-        left: 1.5rem;
-    }
-
     .contact-info h2 {
         font-size: 2.5rem;
     }
@@ -1716,11 +1699,6 @@ footer p {
     .contact-wrapper {
         padding: 2.5rem 1rem;
         gap: 2rem;
-    }
-
-    .contact-wrapper::before {
-        left: 1rem;
-        font-size: 0.6rem;
     }
 
     .contact-info h2 {
